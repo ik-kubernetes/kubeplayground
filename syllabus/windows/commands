@@ -1,0 +1,4 @@
+
+
+creds -- kubectl create -f syllabus/windows/windows.yml
+creds -- kubectl delete -f syllabus/windows/windows.yml

@@ -1,0 +1,6 @@
+$  creds -- kubectl get pods --all-namespaces
+
+$ creds -- kubectl create -f helm_cfg/rbac-config.yml
+$ creds -- helm init --service-account tiller
+$ creds -- kubectl create namespace tiller-world
+$ creds -- kubectl create serviceaccount tiller --namespace tiller-world

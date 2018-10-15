@@ -1,0 +1,23 @@
+https://kubernetes.io/docs/tutorials/stateful-application/cassandra/
+
+
+aws-vault exec $AWS_PROFILE -- kubectl create -f syllabus/stateful_sets/cassandra-service.yml
+aws-vault exec $AWS_PROFILE --  kubectl get svc cassandra
+aws-vault exec $AWS_PROFILE -- kubectl create -f syllabus/stateful_sets/cassandra-stateful.yml
+
+# Wait till all the cassandra services get deployed
+aws-vault exec $AWS_PROFILE -- kubectl get pods -l="app=cassandra" -w
+# Cassandra rign status
+aws-vault exec $AWS_PROFILE --  kubectl exec -it cassandra-0 -- nodetool status
+
+aws-vault exec $AWS_PROFILE -- kubectl exec -it cassandra-0 -- /bin/bash
+# Edit statefult set
+aws-vault exec $AWS_PROFILE -- kubectl edit statefulset cassandra
+
+grace=$(creds -- kubectl get po cassandra-0 -o=jsonpath='{.spec.terminationGracePeriodSeconds}') \
+  && creds -- kubectl delete statefulset -l app=cassandra \
+  && echo "Sleeping $grace" \
+  && sleep $grace \
+  && creds -- kubectl delete pvc -l app=cassandra
+
+creds -- kubectl delete service -l app=cassandra

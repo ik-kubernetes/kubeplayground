@@ -1,0 +1,19 @@
+
+# Default storage classes
+https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/storage-class
+
+aws-vault exec $AWS_PROFILE -- kubectl get nodes
+
+# Check if default storage class is installed
+aws-vault exec $AWS_PROFILE -- kubectl get sc
+aws-vault exec $AWS_PROFILE -- kubectl describe storageclass standard
+
+aws-vault exec $AWS_PROFILE -- kubectl create -f syllabus/dynamic_storage/aws_volume_default.yml
+aws-vault exec $AWS_PROFILE -- kubectl create -f syllabus/dynamic_storage/aws_mysql_volume.yml
+aws-vault exec $AWS_PROFILE -- kubectl get storageclass
+
+Delete
+aws-vault exec $AWS_PROFILE -- kubectl delete -f syllabus/dynamic_storage/aws_volume_default.yml
+aws-vault exec $AWS_PROFILE -- kubectl delete -f syllabus/dynamic_storage/aws_mysql_volume.yml
+
+aws-vault exec $AWS_PROFILE -- kubectl get events

@@ -1,0 +1,68 @@
+
+# Scenario steps
+
+creds -- kubectl get poddisruptionbudgets
+
+creds -- kubectl create -f syllabus/zookeeper/aws_volume_default.
+creds -- kubectl apply -f syllabus/zookeeper/zookeeper.yml
+# Get the hostnames of the Pods in the zk StatefulSe
+for i in 0 1 2; do creds -- kubectl exec zk-$i -- hostname; done
+creds -- kubectl exec -it zk-0 -- /bin/bash
+# Get zookeeper IDs
+for i in 0 1 2; do echo "myid zk-$i";creds -- kubectl exec zk-$i -- cat /var/lib/zookeeper/data/myid; done
+# To get the Fully Qualified Domain Name (FQDN) of each Pod in the zk StatefulSet use the following command.
+for i in 0 1 2; do creds -- kubectl exec zk-$i -- hostname -f; done
+# Read config files
+creds -- kubectl exec zk-0 -- cat /opt/zookeeper/conf/zoo.cfg
+
+# Sanity testing the Ensemble
+creds -- kubectl exec zk-0 zkCli.sh create /hello world
+creds -- kubectl exec zk-2 zkCli.sh get /hello
+
+# Provide a durable storage
+creds -- kubectl delete statefulset zk
+creds -- kubectl get pods -w -l app=zk
+creds -- kubectl apply -f syllabus/zookeeper/zookeeper.yml
+creds -- kubectl exec zk-2 zkCli.sh get /hello >> success
+
+creds -- kubectl edit statefulset zk
+```yml
+volumeClaimTemplates:
+  - metadata:
+      name: datadir
+      annotations:
+        volume.alpha.kubernetes.io/storage-class: anything
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 15Gi
+```
+# Gets zookeeper information on running processes
+creds -- kubectl exec zk-0 -- ps -elf
+# Get file permissions
+creds -- kubectl exec -ti zk-0 -- ls -ld /var/lib/zookeeper/data
+# Update set
+creds -- kubectl patch sts zk --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/resources/requests/cpu", "value":"0.3"}]'
+creds -- kubectl rollout status sts/zk
+# Get update history and rollback
+creds -- kubectl rollout history sts/zk
+creds -- kubectl rollout undo sts/zk
+# Termiate one zookeeper
+creds -- kubectl exec zk-0 -- ps -ef
+creds -- kubectl get pod -w -l app=zk
+creds -- kubectl exec zk-0 -- pkill java
+# Get to pod ofiinity, and check awailability zones
+for i in 0 1 2; do creds kubectl get pod zk-$i --template {{.spec.nodeName}}; echo ""; done
+
+# Survive Node update
+##Use this command to get the zk-pdb PodDisruptionBudget.
+creds -- kubectl get pdb zk-pdb
+## Stop of of the nodes
+creds -- kubectl cordon <node-name>
+creds -- kubectl drain $(creds -- kubectl get pod zk-0 --template {{.spec.nodeName}}) --ignore-daemonsets --force --delete-local-data
+creds -- kubectl uncordon <node-name>
+
+creds -- kubectl delete -f syllabus/zookeeper/zookeeper.yml
+creds -- kubectl delete -f syllabus/zookeeper/aws_volume_default.yml
+creds -- kubectl delete pvc -l app=zk

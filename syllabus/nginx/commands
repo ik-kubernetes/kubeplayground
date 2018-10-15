@@ -1,0 +1,5 @@
+aws-vault exec $AWS_PROFILE -- kubectl create -f syllabus/nginx/web.
+aws-vault exec $AWS_PROFILE -- kubectl delete -f syllabus/nginx/web.yml
+
+
+aws-vault exec $AWS_PROFILE -- kubectl exec -it custompod -- /bin/bash -c "ls -la /var/www"

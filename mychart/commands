@@ -1,0 +1,11 @@
+# Helm
+
+creds -- helm init # Install Helm and Tiller on cluster
+creds -- helm version
+
+Buy default helm not working with 1.10 K8s version
+creds -- kubectl get pods --all-namespaces
+
+creda -- helm install --debug --dry-run ./mycharthelm
+cresd -- helm get manifest <name>
+creds -- helm install ./mychart

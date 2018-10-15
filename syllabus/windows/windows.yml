@@ -1,0 +1,10 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: windowstest
+  labels:
+    app: windowsservercore
+spec:
+  containers:
+    - name: windowsserver
+      image: microsoft/windowsservercore

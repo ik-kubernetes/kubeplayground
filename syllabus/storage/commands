@@ -1,0 +1,6 @@
+create pv claim
+aws-vault exec $AWS_PROFILE -- kubectl create -f syllabus/storage/pv_claim.yml
+aws-vault exec $AWS_PROFILE -- kubectl create -f syllabus/storage/generic_claim.yml
+
+aws-vault exec $AWS_PROFILE -- kubectl delete -f syllabus/storage/generic_claim.yml
+aws-vault exec $AWS_PROFILE -- kubectl delete -f syllabus/storage/pv_claim.yml
