@@ -1,0 +1,6 @@
+[submodule "istio"]
+	path = istio
+	url = git@github.com:istio/istio.git
+[submodule "serving"]
+	path = serving
+	url = git@github.com:knative/serving.git

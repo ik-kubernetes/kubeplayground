@@ -8,5 +8,17 @@ help:
 start_minikube: ## Start minikube
 	@bin/minikube.sh start
 
+test_minikube: ## Smoke test minikube
+	@bin/minikube_smoke.sh
+
+helm_setup: ## Install Helm
+	@bin/helm.install.sh
+
 istio_install: ## Install Istio
 	@bin/istio.sh
+
+istio_delete: ## DeleteIstio
+	@bin/istio.delete.sh
+
+
+
