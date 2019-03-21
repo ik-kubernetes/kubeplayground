@@ -49,7 +49,7 @@
 export ENVIRONMENT=dev
 aws-vault exec $AWS_PROFILE -- make terraform
 export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config:k8s_configs/config-demo
-eport KUBE_AUTH="k8s_configs/config-map-aws-auth.yaml"
+export KUBE_AUTH="k8s_configs/config-map-aws-auth.yaml"
 aws-vault exec $AWS_PROFILE -- kubectl cluster-info
 aws-vault exec $AWS_PROFILE -- kubectl apply -f $KUBE_AUTH
 aws-vault exec $AWS_PROFILE -- kubectl get nodes --watch
@@ -72,5 +72,18 @@ How to expose service to make it available outside of the cluster?
 
 
 ## TODO
+
+
+joe is a director of stamps
+
+As Iam aware going forward we are not using an RDS. We need to discuss how to get access to
+
+AWS Admin access for 1-2 hour. We are going to create groups with different access level
+DNS domain buy or use some.
+
+Since we are not going to use RDS and the plan is to use SQL DB on top of EC2, can you please discuss internally regarding getting access to DBs for reporting. We are in the process of moving one of the environment to Stamps AWS.
+
+deploy steps:
+New accounts please
 
 

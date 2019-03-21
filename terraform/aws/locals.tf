@@ -8,7 +8,7 @@ apiVersion: v1
 clusters:
 - cluster:
     server: ${aws_eks_cluster.main.endpoint}
-    certificate-authority-data: ${aws_eks_cluster.main.certificate_authority.0.data}
+    certificate-authority-data: ${te}
   name: kubernetes
 contexts:
 - context:

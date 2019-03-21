@@ -1,0 +1,87 @@
+AWS EKS
+https://medium.com/@dmaas/setting-up-amazon-eks-what-you-must-know-9b9c39627fbc
+
+Domain Really clear installation of K8s and Domains
+https://github.com/kubernetes/kops/blob/master/docs/aws.md
+
+https://medium.com/tailor-tech/production-grade-kubernetes-on-aws-primer-5b83e71c024
+https://medium.com/hashmapinc/making-kubernetes-approachable-our-experience-with-kops-and-rancher-620bbbdc19ab
+
+
+kubernetes
+https://kubedex.com/category/tutorials/
+
+P;ugins
+https://kubedex.com/top-10/
+
+Create a Presenation out of it
+https://medium.com/tailor-tech/production-grade-kubernetes-on-aws-primer-5b83e71c024
+
+
+Splunk
+https://github.com/splunk/splunk-connect-for-kubernetes
+https://github.com/splunk/splunk-connect-for-kubernetes/tree/master/helm-chart
+
+TODO:
+Create Cluster
+Deploy application
+Deploy instio
+Deploy Splunk forwarder
+
+
+How to use:
+https://medium.com/tailor-tech/production-grade-kubernetes-on-aws-4-tools-that-made-our-lives-easier-29438e8b58ca
+
+Top 10 Plugins Kubernetes
+https://kubedex.com/top-10/
+
+
+AWS ISTIO NLB
+https://istio.io/blog/2018/aws-nlb/
+https://medium.com/@cy.chiang/how-to-integrate-aws-alb-with-istio-v1-0-b17e07cae156
+https://medium.com/@cy.chiang/how-to-integrate-aws-alb-with-istio-v1-0-b17e07cae156
+
+https://blog.jayway.com/2018/10/22/understanding-istio-ingress-gateway-in-kubernetes/
+
+
+DB Connections
+https://istio.io/blog/2018/egress-tcp/
+
+
+
+How to present to public:
+https://github.com/IBM/microservices-traffic-management-using-istio/blob/master/README.md
+
+
+Installation documenation
+https://medium.com/@dmaas/setting-up-amazon-eks-what-you-must-know-9b9c39627fbc
+
+
+Install Tiller Automatically
+https://github.com/terraform-providers/terraform-provider-kubernetes/issues/161
+
+K8s cool setup
+https://medium.com/@dmaas/setting-up-amazon-eks-what-you-must-know-9b9c39627fbc
+
+
+Tiller & helm
+https://rimusz.net/tillerless-helm/
+https://blog.tenx.tech/the-how-and-why-behind-tiller-less-helm-340a071d51c8
+Install Tiller Locally
+https://rimusz.net/tillerless-helm/
+
+AWS K8S Booking example and istio(Presentation how we can do stuff in real life)
+https://aws.amazon.com/blogs/opensource/getting-started-istio-eks/
+
+
+How to convince
+https://medium.com/@jpcontad/a-year-of-running-kubernetes-as-a-product-7eed1204eecd
+
+CPU & Memory Limits
+https://medium.com/hotels-com-technology/kubernetes-container-resource-requirements-part-2-cpu-83ca227a18b1
+
+https://github.com/srinandan/istio-workshop/blob/master/README.md
+
+K6 performance testing
+https://docs.k6.io/docs/influxdb-grafana
+

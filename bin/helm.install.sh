@@ -14,8 +14,8 @@ helm init --service-account tiller --wait
 kubectl get pods --all-namespaces
 
 echo "Ready to deploy Istio"
-helm install ${ISTIO}/install/kubernetes/helm/istio \
-  --name istio --namespace istio-system 
+# helm install ${ISTIO}/install/kubernetes/helm/istio \
+#   --name istio --namespace istio-system
   # --set global.nodePort=true \
   # --set ingress.enabled=true \
   # --set gateways.istio-ingressgateway.enabled=true \
@@ -29,22 +29,21 @@ helm install ${ISTIO}/install/kubernetes/helm/istio \
   # --set servicegraph.enabled=true \
   # --wait
 
-# helm install ${ISTIO}/install/kubernetes/helm/istio \
-#   --name istio-minimal --namespace istio-system \
-#   --set security.enabled=false \
-#   --set ingress.enabled=true \
-#   --set gateways.istio-ingressgateway.enabled=false \
-#   --set gateways.istio-egressgateway.enabled=false \
-#   --set galley.enabled=false \
-#   --set sidecarInjectorWebhook.enabled=true \
-#   --set servicegraph.enabled=true \
-#   --set mixer.enabled=false \
-#   --set prometheus.enabled=true \
-#   --set grafana.enabled=true \
-#   --set global.proxy.envoyStatsd.enabled=false \
-#   --set pilot.sidecar=true \
-#   --set mtls.enabled=true \
-#   --wait
+helm install ${ISTIO}/install/kubernetes/helm/istio \
+  --name istio-minimal --namespace istio-system \
+  --set security.enabled=true \
+  --set ingress.enabled=true \
+  --set gateways.istio-ingressgateway.enabled=true \
+  --set gateways.istio-egressgateway.enabled=true \
+  --set galley.enabled=false \
+  --set sidecarInjectorWebhook.enabled=true \
+  --set servicegraph.enabled=true \
+  --set mixer.enabled=false \
+  --set prometheus.enabled=true \
+  --set grafana.enabled=true \
+  --set global.proxy.envoyStatsd.enabled=false \
+  --set pilot.sidecar=true \
+  --set mtls.enabled=true
 
 echo "Show current services"
 kubectl get pods --all-namespaces

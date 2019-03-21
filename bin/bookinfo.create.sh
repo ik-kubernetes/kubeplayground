@@ -1,8 +1,10 @@
 
-kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
-kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+ISTIO="$(pwd)/istio-1.0.2"
+kubectl delete -f $ISTIO/samples/bookinfo/platform/kube/bookinfo.yaml
+kubectl apply -f $ISTIO/samples/bookinfo/platform/kube/bookinfo.yaml
+kubectl apply -f $ISTIO/samples/bookinfo/networking/bookinfo-gateway.yaml
 
-sudo kubectl -n istio-system port-forward istio-ingressgateway-69b597b6bd-hl8fz 80
+sudo kubectl -n istio-system port-forward istio-ingressgateway-5c457d45c4-4m8c7 80
 
 
 for i in {1..10}; do curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage; done
@@ -23,3 +25,15 @@ http://localhost:8088/dotgraph
 
 grafama
 kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}') 3000:3000
+
+
+ export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}')
+
+
+
+ kubectl apply -f $ISTIO/samples/bookinfo/networking/destination-rule-all-mtls.yaml
+
+ $ISTIO/samples/bookinfo/platform/kube/cleanup.sh
+
+
+ https://github.com/srinandan/istio-workshop/blob/master/README.md
